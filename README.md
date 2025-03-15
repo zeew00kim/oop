@@ -19,7 +19,7 @@
 - `cin.getline(password, 11, '\n')` 공백을 포함한 문자열 입력
 - `strcmp()` 함수를 사용하여 문자열의 값이 동일한지 확인
 ---
-### useString.c++
+### <span style="color: skyblue">useString.c++</span>
 `<string>`헤더 선언 시 `string` 자료형 사용이 가능하다.<br>
 `string` 자료형은 문자열의 크기에 맞게 스스로 내부 버퍼를 조절
 - 문자열 값을 입력 시 `getline(cin, brand)`와 같이 사용한다.
