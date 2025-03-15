@@ -11,3 +11,7 @@
 - `Rect(int length)` 생성자는 main 함수에서 입력된 너비 값만 사용
 - `bool isSquare()` 함수는 3항 연산자를 통해 정사각형 유무를 판단
 - `main()`함수에선 `isSquare()`함수 실행에 따른 결과를 출력
+### useCstring.c++
+`strcmp(), strlen(), strcpy()` 등의 함수를 사용할 수 있는<br>
+`<cstring>` 또는 `<string.h>` 헤더
+- `strcmp()` 함수를 사용하여 문자열의 값이 동일한지 확인
