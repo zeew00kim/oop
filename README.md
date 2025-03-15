@@ -14,4 +14,5 @@
 ### useCstring.c++
 `strcmp(), strlen(), strcpy()` 등의 함수를 사용할 수 있는<br>
 `<cstring>` 또는 `<string.h>` 헤더
+- `cin.getline(password, 11, '\n')` 공백을 포함한 문자열 입력
 - `strcmp()` 함수를 사용하여 문자열의 값이 동일한지 확인

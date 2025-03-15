@@ -10,7 +10,8 @@ int main() {
     
     while(true) {
         cout << "P/W : ";
-        cin >> password;
+        cin.getline(password, 11, '\n');
+
         if (strcmp(password, "zeew00") == 0) {
             cout << "program off...\n";
             break;
