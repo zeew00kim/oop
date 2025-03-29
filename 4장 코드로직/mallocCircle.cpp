@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cmath>
+#include <cstring>
+#include <string>
 using namespace std;
 
 // 숙쁠쁠 실습 4-2 1번 문제
