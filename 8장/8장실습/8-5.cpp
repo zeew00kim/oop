@@ -1,86 +1,90 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
-// 8-5 실습 : 다중 상속 받는 클래스 작성
+// 1차 실습 2번 문제
 
-class Adder {
+class adder {
 protected:
 	int add(int a, int b) {
 		return a + b;
 	}
 };
 
-class Subtractor {
+class sub {
 protected:
-	int minus(int a, int b) {
+	int min(int a, int b) {
 		return a - b;
 	}
 };
 
-class Multipler {
+class mul {
 protected:
-	int mul(int a, int b) {
+	int m(int a, int b) {
 		return a * b;
 	}
 };
 
-class Divider {
+class div {
 protected:
-	int div(int a, int b) {
+	int d(int a, int b) {
 		if (b == 0) {
 			cout << "0으로 나눌 수 없습니다.";
+			return 0;
 		}
-		else {
-			return a / b;
-		}
+		return a / b;
 	}
 };
 
-class Calculator : public Adder, public Subtractor, public Multipler, public Divider {
+class calculator : public adder, public sub, public mul, public div {
 public:
-	int calc(char op, int a, int b, int &result) {
-		switch (op) {
-		case '+':
-			result = add(a, b);
-			break;
-		case '-':
-			result = minus(a, b);
-			break;
-		case '*':
-			result = mul(a, b);
-			break;
-		case '/':
-			result = div(a, b);
-			break;
-		default:
-			cout << "연산자가 잘못 입력되었습니다.\n";
-			break;
-		}
-		if (result == -1 || result == 0) {
-			result = 1;
-			return result;
-		}
-		else return result;
+	int calc(char op, int a, int b, int& res);
+	~calculator() {
+		cout << "소멸자 실행\n";
 	}
 };
+
+int calculator::calc(char op, int a, int b, int& res) {
+	switch (op) {
+	case '+':
+		res = add(a, b);
+		break;
+	case '-':
+		res = min(a, b);
+		break;
+	case '*':
+		res = m(a, b);
+		break;
+	case '/':
+		res = d(a, b);
+		break;
+	default:
+		cout << "연산자 입력 오류\n";
+		break;
+	}
+	return res;
+}
 
 int main() {
 
 	int a, b;
-	int result;
+	int res = 0;
 
-	cout << "a를 입력 : ";
-	cin >> a;
+	do {
+		cout << "a, b 값을 입력 : ";
+		cin >> a >> b;
 
-	cout << "b를 입력 : ";
-	cin >> b;
+		calculator temp;
 
-	Calculator handCalc;
+		cout << "a + b : " << temp.calc('+', a, b, res) << endl;
+		cout << "a - b : " << temp.calc('-', a, b, res) << endl;
+		cout << "a * b : " << temp.calc('*', a, b, res) << endl;
+		cout << "a / b : " << temp.calc('/', a, b, res) << endl;
 
-	cout << "a + b = " << handCalc.calc('+', a, b, result) << endl;
-	cout << "a - b = " << handCalc.calc('-', a, b, result) << endl;
-	cout << "a * b = " << handCalc.calc('*', a, b, result) << endl;
-	cout << "a / b = " << handCalc.calc('/', a, b, result) << endl;
+		if (res == 0) {
+			cout << "결과가 0입니다. 다시 입력하세요.\n";
+		}
+	} while (res == 0);
 
 	return 0;
 }
