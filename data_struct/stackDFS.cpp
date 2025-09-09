@@ -5,58 +5,53 @@
 using namespace std;
 
 template <class T>
-class Queue {
-    int front, rear, size;
-    vector<T> data;
+class Stack {
+    int top, size;
+    vector<int> data;
 public:
-    Queue(int size = 5) {
+    Stack(int size = 5) {
         this->size = size;
-        front = rear = 0;
+        top = -1;
         data.resize(this->size);
     }
     bool is_empty() {
-        return (front == rear) ? true : false;
+        return (top == -1) ? true : false;
     }
     bool is_full() {
-        return (front == (rear + 1) % size) ? true : false;
+        return (top == size - 1) ? true : false;
     }
-    void euqueue(T element) {
-        if (is_full()) throw runtima_error("overflow error");
-        data[rear] = element;
-        rear = (rear + 1) % size;
+    void push(T element) {
+        if (is_full()) throw runtime_error("overflow error");
+        data[++top] = element;
     }
-    T dequeue() {
+    T pop() {
         if (is_empty()) throw runtime_error("underflow error");
-        T temp = data[front];
-        front = (front + 1) % size;
-        return temp;
+        return data[top--];
     }
     T peek() {
         if (is_empty()) throw runtime_error("underflow error");
-        return data[front];
+        return data[top];
     }
 };
 
 vector<vector<int>> graph;
 vector<bool> visited;
 
-void queueBFS(const int& start, const int& size) {
-    Queue<int> queue(size);
-    queue.euqueue(start);
+void stackDFS(const int& start, const int& size) {
+    Stack<int> stack(size);
+    stack.push(start);
 
-    while (!queue.is_empty()) {
-        int node = queue.dequeue();
-        if (!visited[node]) {
-            visited[node] = true;
-            cout << node << " ";
-        }
-        for (auto it = graph[node].begin(); it != graph[node].end(); ++it) {
-            if (!visited[*it]) {
-                queue.euqueue(*it);
-            }
+    while (!stack.is_empty()) {
+        int node = stack.pop();
+        if (visited[node]) continue;
+        visited[node] = true;
+        cout << node << " ";
+        for (auto it = graph[node].rbegin(); it != graph[node].rend(); ++it) {
+            if (!visited[*it]) stack.push(*it);
         }
     }
 }
+
 int main() {
 
     int size = 6;
@@ -71,7 +66,7 @@ int main() {
     graph[5] = { 2, 6 };
     graph[6] = { 5 };
 
-    queueBFS(1, size + 1);
+    stackDFS(1, size + 1);
 
     return 0;
 }
