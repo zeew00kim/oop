@@ -57,6 +57,7 @@ void queueBFS(const int& start, const int& size) {
         }
     }
 }
+
 int main() {
 
     int size = 6;
